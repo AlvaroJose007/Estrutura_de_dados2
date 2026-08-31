@@ -1,1 +1,69 @@
+# exercicio 1
+class EditorTexto:
+    def __init__(self):
+        self.pilha_acoes = []
 
+    def realizar_acao(self, acao):
+        self.pilha_acoes.append(acao)
+        print(f"Ação realizada e salva no topo: '{acao}'")
+
+    def desfazer(self):
+        if self.pilha_acoes:
+            acao_revertida = self.pilha_acoes.pop()
+            print(f"Desfazendo (Ctrl+Z): '{acao_revertida}'")
+        else:
+            print("Não há ações para desfazer.")
+
+editor = EditorTexto()
+editor.realizar_acao("digitar 'Ola'")
+editor.realizar_acao("apagar 'a'")
+editor.desfazer() 
+
+#exercicio 2
+
+class SpoolerImpressao:
+    def __init__(self):
+        self.fila_impressao = deque()
+
+    def enfileirar_documento(self, documento):
+        self.fila_impressao.append(documento)
+        print(f"Documento '{documento}' adicionado ao final da fila.")
+
+    def imprimir_proximo(self):
+        if self.fila_impressao:
+            documento = self.fila_impressao.popleft()
+            print(f"Imprimindo o documento mais antigo: '{documento}'")
+        else:
+            print("A fila de impressão está vazia.")
+
+impressora = SpoolerImpressao()
+impressora.enfileirar_documento("Doc_1_Relatorio")
+impressora.enfileirar_documento("Doc_2_Curriculo")
+impressora.imprimir_proximo() # Vai imprimir o Doc_1_Relatorio
+
+#Desafio
+
+class TriagemHospitalar:
+    def __init__(self):
+        self.fila_pacientes = deque()
+
+    def adicionar_paciente_normal(self, nome):
+        self.fila_pacientes.append(nome)
+        print(f"Paciente normal '{nome}' aguardando no final da fila.")
+
+    def adicionar_paciente_prioritario(self, nome):
+        self.fila_pacientes.appendleft(nome)
+        print(f"Atencao: Paciente Prioritário '{nome}' inserido no inicio da fila")
+
+    def chamar_proximo_atendimento(self):
+        if self.fila_pacientes:
+            paciente = self.fila_pacientes.popleft()
+            print(f"Chamando para o consultório: '{paciente}'")
+        else:
+            print("Nenhum paciente aguardando atendimento.")
+
+triagem = TriagemHospitalar()
+triagem.adicionar_paciente_normal("João")
+triagem.adicionar_paciente_normal("Maria")
+triagem.adicionar_paciente_prioritario("Sr. Antônio (Idoso)")
+triagem.chamar_proximo_atendimento() # Vai chamar o Sr. Antônio primeiro
